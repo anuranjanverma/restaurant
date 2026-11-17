@@ -3,7 +3,7 @@
 Live site: <https://anuranjanv17.sg-host.com/>
 Upstream repo: <https://github.com/anuranjanverma/restaurant>
 **Working fork (owner/admin):** <https://github.com/RishuBurnwal/restaurant>
-Branches: `main` and `rishu.dev` — **both deploy** to the live web root (`public_html`).
+Branches: `main` and `rishu.dev` deploy to **staging2**; `production` deploys to the **live site**.
 `main` also carries the site content, so the repo landing page shows the code.
 
 > **Status: working end to end.** A push to `main` or `rishu.dev` deploys to SiteGround and the
@@ -57,10 +57,10 @@ is not exposed as a workflow input.
 | Overwriting WordPress config | `wp-config.php`, `.user.ini`, `.htaccess` are rsync-excluded |
 | Pushing 100 MB of media | `wp-content/uploads/`, caches, backups, `node_modules/`, `vendor/` are excluded |
 | Man-in-the-middle on SSH | `ssh-keyscan` + optional pinned fingerprint secret; `StrictHostKeyChecking yes` |
-| Deploy storms | `concurrency: deploy-rishu-dev` with `cancel-in-progress: false` |
+| Deploy storms | per-target `concurrency` groups (`deploy-staging`, `deploy-production`), `cancel-in-progress: false` |
 
-Deployment target is the **live web root** (`public_html`). rsync has no `--delete`, so the live
-WordPress site cannot be affected while the pipeline is being proven.
+Routing: `main` / `rishu.dev` → **staging2** (`DEPLOY_PATH`); `production` → **live site**
+(`DEPLOY_PATH_PROD`). rsync has no `--delete`, so nothing on either server is ever removed.
 
 ---
 
@@ -122,7 +122,8 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
 | `SSH_HOST` | SSH host from Site Tools |
 | `SSH_PORT` | SSH port from Site Tools |
 | `SSH_USER` | SSH username from Site Tools |
-| `DEPLOY_PATH` | absolute server path, e.g. `/home/customer/www/anuranjanv17.sg-host.com/public_html` |
+| `DEPLOY_PATH` | staging web root: `/home/customer/www/staging2.anuranjanv17.sg-host.com/public_html` |
+| `DEPLOY_PATH_PROD` | production web root: `/home/customer/www/anuranjanv17.sg-host.com/public_html` |
 | `SSH_KNOWN_HOSTS_FINGERPRINT` | *(optional)* pinned host key fingerprint, see 4.5 |
 
 Via CLI (requires repo admin):
@@ -132,7 +133,8 @@ gh secret set SSH_PRIVATE_KEY --repo anuranjanverma/restaurant < deploy-keys\sg_
 gh secret set SSH_HOST --repo anuranjanverma/restaurant --body "ssh.example.com"
 gh secret set SSH_PORT --repo anuranjanverma/restaurant --body "18765"
 gh secret set SSH_USER --repo anuranjanverma/restaurant --body "u1234-abc"
-gh secret set DEPLOY_PATH --repo anuranjanverma/restaurant --body "/home/customer/www/anuranjanv17.sg-host.com/public_html"
+gh secret set DEPLOY_PATH --repo anuranjanverma/restaurant --body "/home/customer/www/staging2.anuranjanv17.sg-host.com/public_html"
+gh secret set DEPLOY_PATH_PROD --repo anuranjanverma/restaurant --body "/home/customer/www/anuranjanv17.sg-host.com/public_html"
 ```
 
 ### 4.4 Create the `staging` environment (optional but recommended)

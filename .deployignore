@@ -58,6 +58,9 @@ build/
 # --- Logs / OS junk ---
 *.log
 logs/
+dryrun.txt
+pending.txt
+pending2.txt
 .DS_Store
 Thumbs.db
 desktop.ini
