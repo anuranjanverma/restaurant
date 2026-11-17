@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Deploy check - rishu.dev</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #0f172a; color: #e2e8f0;
+  }
+  .card {
+    max-width: 46rem; width: calc(100% - 2rem); padding: 2.25rem 2rem;
+    border-radius: 16px; background: #1e293b;
+    border: 1px solid #334155; box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  }
+  h1 { margin: 0 0 .35rem; font-size: 1.5rem; letter-spacing: -.02em; }
+  .badge {
+    display: inline-block; margin-bottom: 1.25rem; padding: .25rem .6rem;
+    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: #052e16; background: #4ade80; border-radius: 999px;
+  }
+  p.lead { margin: 0 0 1.5rem; color: #94a3b8; line-height: 1.6; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: .55rem 1.25rem; margin: 0; }
+  dt { color: #94a3b8; font-size: .85rem; }
+  dd { margin: 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .9rem; word-break: break-word; }
+  footer { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid #334155; font-size: .78rem; color: #64748b; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <span class="badge">Staging deploy test</span>
+    <h1>Deployed via rishu.dev</h1>
+    <p class="lead">If you can read this, a push to the <code>rishu.dev</code> branch reached the
+      SiteGround server without any manual upload.</p>
+    <dl>
+      <dt>Deployed</dt><dd>2026-11-17 03.23.39</dd>
+      <dt>Branch</dt><dd>rishu.dev</dd>
+      <dt>Commit</dt><dd>e55e9c7</dd>
+      <dt>Target</dt><dd>SiteGround staging (/Rishu-Burnwal/)</dd>
+    </dl>
+    <footer>Automated deploy check page. Not linked from the live site navigation.</footer>
+  </main>
+</body>
+</html>

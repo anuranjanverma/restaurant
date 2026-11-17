@@ -46,3 +46,56 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+
+# ---------------------------------------------------------------
+# Deployment safety (added for the rishu.dev auto-deploy workflow)
+# ---------------------------------------------------------------
+
+# Secrets and credentials - NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+deploy-keys/
+README-SSH.md
+ssh-instructions.txt
+*ssh-instructions*
+
+# Local backups and DB dumps (kept outside git on purpose)
+backups/
+*.sql
+*.sql.gz
+*.tar.gz
+*.zip
+
+# Server-specific / generated config
+.user.ini
+.htaccess.local
+
+# WordPress caches and generated content
+/wp-content/cache/
+/wp-content/upgrade/
+/wp-content/upgrade-temp-backup/
+/wp-content/ai1wm-backups/
+/wp-content/updraft/
+/wp-content/backup*
+/wp-content/litespeed/
+/wp-content/debug.log
+
+# Build output / dependencies
+node_modules/
+vendor/
+dist/
+build/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
