@@ -10,7 +10,7 @@
 #   * staging and production never write to each other's path
 on:
   push:
-    branches: ["main", "rishu.dev", "production"]
+    branches: ["main", "production"]
   workflow_dispatch:
     inputs:
       target:
