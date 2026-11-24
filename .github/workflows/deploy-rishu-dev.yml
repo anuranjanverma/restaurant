@@ -111,7 +111,7 @@ jobs:
       - name: Preflight - rsync dry-run
         run: |
           set -euo pipefail
-          rsync -az --dry-run --itemize-changes --stats \
+          rsync -az --checksum --no-times --omit-dir-times --dry-run --itemize-changes --stats \
             -e "ssh -F $HOME/.ssh/config" \
             --exclude-from=.deployignore \
             ./ "sg-deploy:${{ secrets.DEPLOY_PATH }}/" | tee dryrun.txt
@@ -122,7 +122,7 @@ jobs:
         if: ${{ inputs.dry_run_only != true }}
         run: |
           set -euo pipefail
-          rsync -az --itemize-changes \
+          rsync -az --checksum --no-times --omit-dir-times --itemize-changes \
             -e "ssh -F $HOME/.ssh/config" \
             --exclude-from=.deployignore \
             ./ "sg-deploy:${{ secrets.DEPLOY_PATH }}/"
